@@ -15,10 +15,6 @@ function App() {
 
   const fetchQuestions = async () => {
     try {
-      if (!title || title.length <= 0) {
-        alert("Please provide title");
-        return;
-      }
       setMsg("");
       setLoading(true);
       const response = await fetch(
@@ -33,7 +29,6 @@ function App() {
       console.log(err);
     } finally {
       setLoading(false);
-      console.log(metaData);
     }
   };
 
@@ -64,9 +59,9 @@ function App() {
       </form>
 
       <div style={{ marginTop: "1rem", height: "60vh", overflow: "auto" }}>
-        {loading ? <h4>Loading...</h4> : <QuestionList data={data} />}
+        {loading ? <h4>Loading...</h4> : <QuestionList limit={limit} page={page} data={data} />}
       </div>
-      <p>{msg}</p>
+      <h4 style={{ textAlign: "center" }}>{msg}</h4>
       {data.length > 0 && (
         <Pagination
           page={page}
